@@ -30,11 +30,12 @@
             End Datetime:
             <p>
                 <input type="datetime" name="enddateTime" id="enddateTime" required="required">
-                <input type="text" name="character_ids" id="character_ids">
+                <input type="text" name="character_ids" id="character_ids" hidden>
             </p>
             <input type="text" name="assignment_name" id="assignment_id" placeholder="Enter assignment name" required="required">
         </div>
         <p>
+            <input type="number" name="teacher_id" id="teacher_id" value='1' hidden>
             <input type="submit" value="Upload Assignment" id="add_assignment">
         </p>
     </form>
