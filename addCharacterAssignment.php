@@ -11,6 +11,7 @@
 
 <body>
     <form action="" method="post">
+        add assignment
         <div id="form_header">
             <p>Eight(8) characters should not be exceeded per assignment</p>
             Remaining with <span id="remaining_characters"></span>
