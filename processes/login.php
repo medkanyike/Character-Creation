@@ -17,8 +17,10 @@ if(isset($_POST['login_bttn'])){
                 $_SESSION['password'] = $password;
                 header("Location:.\../adminPage.php");
             }else{
+                session_start();
                 $_SESSION['username'] = $username;
-                header("Location:.\../teacherPage/.php");
+                $_SESSION['password'] = $password;
+                header("Location:.\../teacherPage.php");
             }
         }else{
             header("Location:.\../index.php?error='passwordNotMatching'");

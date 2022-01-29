@@ -6,23 +6,17 @@ include 'header.php';
     <div id="main_middle_section">
         <?php
         if (isset($_SESSION['username'])) {
-            //if the username and password are still similar to the usercode
-            //the teacher should be able to edit the password as well as the username
-            $username = $_SESSION['username'];
-            $password = $_SESSION['password'];
-            if ($password == $username) {
-                //allow the teacher to change the password or username
-                echo
-                '
-                <label>Register teacher </label>
-                 <form action="" method="post">
-                    <input type="firstname" name="" id="" placeholder="teacher firstname"><br>
-                    <input type="lastname" name="" id="" placeholder=" teacher lastname"><br>
-                    <input type="email" name="" id="" placeholder="teacher email"><br>
-                    <input type="submit" value="Register Teacher">
-                  </form>
-                ';
-            }
+            echo
+            '
+            <label>Register teacher </label>
+                <form action="./processes/registerTeacher.php" method="post">
+                <input type="text" name="firstname" id="" placeholder="teacher firstname"><br>
+                <input type="text" name="lastname" id="" placeholder=" teacher lastname"><br>
+                <input type="email" name="email" id="" placeholder="teacher email"><br>
+                <input type="submit" value="Register Teacher">
+                </form>
+            ';
+       
         } else {
             header("Location:./index.php");
         }
