@@ -14,10 +14,11 @@ include 'header.php';
                 //allow the teacher to change the password or username
                 echo
                 '
+                <label>Register teacher </label>
                  <form action="" method="post">
-                    <input type="firstname" name="" id="" >
-                    <input type="lastname" name="" id="">
-                    <input type="email" name="" id="">
+                    <input type="firstname" name="" id="" placeholder="teacher firstname"><br>
+                    <input type="lastname" name="" id="" placeholder=" teacher lastname"><br>
+                    <input type="email" name="" id="" placeholder="teacher email"><br>
                     <input type="submit" value="Register Teacher">
                   </form>
                 ';
