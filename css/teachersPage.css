@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css?family=Tangerine');
+
+*{
+ margin: 0;
+ padding: 0;
+ list-style: none;
+ text-decoration: none;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: #063146c7;
+}
+.sideBar{
+    position: absolute;
+    width: 250px;
+    height: 100vh;
+    background-color: #042331;
+    transition: all .5s ease;
+    
+}
+.sideBar header{
+    font-size: 22px;
+    color: white;
+    text-align: center;
+    line-height: 70px;
+    background-color: #063146;
+    user-select: none;
+}
+.sideBar ul li{
+    display: block;
+    height: 100%;
+    width: 100%;
+    line-height: 65px;
+    font-size: 20px;
+    color: whitesmoke;
+    padding-left: 40px;
+    box-sizing: border-box;
+    border-top: 1px solid rgba(255, 255, 255,.1);
+    border-bottom: 1px solid black;
+}
+ ul li:hover a{
+    padding-left: 42px;
+    transition: .2s;
+}
+.sideBar ul a i{
+    margin-right: 16px;
+}
+.sideBar ul li a{
+    color: whitesmoke;
+}
+#check{
+    display: none;
+}
+label #btn, label #cancel{
+    position:absolute;
+    background: #042331;
+    cursor: pointer;
+    border-radius: 3px;
+    /* border: 1px solid white; */
+}
+label #btn{
+    left: 40px;
+    top: 10px;
+    color: white;
+    font-size: 35px;
+    padding: 6px 12px;
+    transition: all .5s;
+}
+label #cancel{
+    z-index: 1111;
+    left: -195px;
+    top: 80px;
+    font-size: 30px;
+    color: #042331de;
+    padding: 4px 9px;
+    transition: all .5s;
+    background: #063146c7;
+}
+#check:checked ~ .sideBar{
+    left: 0;
+}
+#check:checked ~ label #btn{
+    left: 250px;
+    opacity: 0;
+    pointer-events: none;
+}
+#check:checked ~ label #cancel{
+    left: 195px;
+}
+
+#middle_section{
+    position: absolute;
+    background-color:white;
+    margin-left:250px;
+    width:70%;
+    align-items: center;
+
+}

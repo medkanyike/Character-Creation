@@ -3,7 +3,7 @@ include 'header.php';
 ?>
 
 <body>
-    <div id="main_middle_section">
+    <div id="middle_section">
         <?php
         if (isset($_SESSION['username'])) {
             echo
@@ -16,12 +16,11 @@ include 'header.php';
                 <input type="submit" value="Register Teacher">
                 </form>
             ';
-       
         } else {
             header("Location:./index.php");
         }
 
         ?>
     </div>
-   
+
 </body>
