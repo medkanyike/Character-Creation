@@ -36,10 +36,10 @@ if($connection == TRUE){
                 $current1 = file_get_contents($file1);
                 //add assignment details
                 $current1 .= $last_assignment_id . "\t";
-                //for fetching the right format for time
+                // for fetching the right format for time
                 $sql4 = "SELECT * FROM assignments WHERE assignment_id = '$last_assignment_id';";
                 $result4 = mysqli_query($connection,$sql4);
-                while($row = mysqli_fetch_assoc($result)){
+                while($row = mysqli_fetch_assoc($result4)){
                     $current1 .= $row['startTime'] . "\t";
                     $current1 .= $row['endTime'] . "\t";
                 }
@@ -49,6 +49,11 @@ if($connection == TRUE){
                 foreach ($character_names as $character_name) {
                         $current1 .= $character_name . "\t";
                 }
+                ///after adding the characters add the -- for the remaining characters
+                for ($i=0; $i < 8 - count($character_names); $i++) {
+                    $current1 .= '-' . "\t";
+                }
+                //$current1 .= ",\n";
                 file_put_contents($file1, $current1);
                 fclose($file1);
         }

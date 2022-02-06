@@ -40,6 +40,18 @@ include 'header.php';
         }
         ?>
     </div>
+    <div id="added_assignments">
+        <?php
+        ///already added assignments
+        // $sql = "SELECT * FROM assignments;";
+        // $results = mysqli_query($connection,$sql);
+        // if(mysqli_num_rows($result)){
+        //     while($row = mysqli_fetch_assco){
+                
+        //     }
+        // }
+        ?>
+    </div>
 </div>
     <script src="./js/addCharacterAssignment.js"></script>
 </body>

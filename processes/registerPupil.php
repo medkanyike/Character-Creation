@@ -30,10 +30,12 @@ if(isset($_POST['register_bttn'])){
                 //add pupil usercode to the pupils files that contains all the usercodes
                 mysqli_query($connection,$sql);
                 $file = '.\../textfiles/pupils.txt';
+                $ext = ".txt";
                 // Open the file to get existing content
                 $current = file_get_contents($file);
                 // Append a new person to the file
-                $current .= $usercode . ",\n";
+                $current .= $usercode . "\n";
+                $current.= ".\../textfiles/assignments/.$usercode$ext";
                 file_put_contents($file, $current);
                 fclose($file);
                 // Write the contents back to the file
@@ -69,8 +71,11 @@ if(isset($_POST['register_bttn'])){
                             $current1 .= $character . "\t";
                             // file_put_contents($file1, $current1);
                         }
+                        for ($i = 0; $i < 8 - mysqli_num_rows($result); $i++) {
+                            $current1 .= '-' . "\t";
+                        }
                         //end the line with ,
-                        $current1 .= ",\n";
+                        $current1 .= "\n";
                        
 
                     }
@@ -81,7 +86,7 @@ if(isset($_POST['register_bttn'])){
                 fclose($file1);
                
 
-                header("Location:.\../teacherPage.php?error='added'");
+                header("Location:.\../ViewPupils.php?error='added'");
             }
         }
         addPupil();

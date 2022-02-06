@@ -1,2 +1,4 @@
-mM1966u,
-kM1624u,
+mM1966u deactivated .\../textfiles/assignments/mM1966u.txt
+kM1624u deactivated .\../textfiles/assignments/kM1624u.txt
+mS1675h activated .\../textfiles/assignments/mS1675h.txt
+mC1105h activated .\../textfiles/assignments/mC1105h.txt

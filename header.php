@@ -38,8 +38,9 @@
               <?php
                 if ($_SESSION['username'] == 'admin') {
                     echo
-                    '
+                '
                     <li><a href="adminPage.php"><i class="fas fa-link"></i>Register Teacher</a></li>
+                    <li><a href="viewTeachers.php"><i class="fas fa-link"></i>Registered teachers</a></li>
            
                    
                   ';
