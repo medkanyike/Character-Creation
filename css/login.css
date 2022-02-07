@@ -1,0 +1,14 @@
+body{
+    margin-left: 400px;
+    background-color: lightskyblue;
+    margin-top: 50px;
+    background-image: url("R.jpg");
+    background-repeat: no-repeat;
+}
+h1{
+    color: whitesmoke;
+    text-shadow: 4px 4px 5px blueviolet;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 60px;
+    ;
+}
