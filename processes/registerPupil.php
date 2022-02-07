@@ -34,7 +34,7 @@ if(isset($_POST['register_bttn'])){
                 // Open the file to get existing content
                 $current = file_get_contents($file);
                 // Append a new person to the file
-                $current .= $usercode . "\n";
+                $current .= "$usercode .\../textfiles/assignments/$usercode.txt .\../textfiles/attempts/$usercode.txt \n";
                 $current.= ".\../textfiles/assignments/.$usercode$ext";
                 file_put_contents($file, $current);
                 fclose($file);
