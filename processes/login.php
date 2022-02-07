@@ -20,6 +20,15 @@ if(isset($_POST['login_bttn'])){
                 session_start();
                 $_SESSION['username'] = $username;
                 $_SESSION['password'] = $password;
+                ///since this is a teacher check the request file and upload all the requests for activation
+                $usercode_requests = file('.\../c/activation/requests.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+                //change every pupil status to requested
+                foreach ($usercode_requests as $req_num => $usercode_request) {
+                    ///update the status to requested
+                    $sql = "UPDATE pupils SET status='requested' WHERE usercode = '$usercode_request';";
+                    mysqli_query($connection,$sql);
+                }
+
                 header("Location:.\../teacherPage.php");
             }
         }else{
