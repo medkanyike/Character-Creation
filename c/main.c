@@ -2,11 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <math.h>
+
 
 int main(void)
 {
-    void viewAll(char);
     FILE *fp;
     FILE *fResults;
     FILE *fp1Lines, *fp2Lines, *fp3Lines, *fp4Lines, *fp5Lines, *fp6Lines, *fp7Lines, *fp8Lines;

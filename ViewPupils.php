@@ -1,10 +1,17 @@
 <?php
 include 'header.php';
-
+include './processes/connection.php';
+    ///refresh the requests and update the database incase of any
 ?>
 <div id="middle_section">
     <?php
-    include './processes/connection.php';
+    $lines = file('./c/activation/requests.txt');
+    foreach ($lines as $line_num => $line) {
+        $code = trim($line);
+        $sql_1 = "UPDATE pupils SET  status='requested' WHERE usercode='$code';";
+        mysqli_query($connection,$sql_1);
+    }
+
     $sql = "SELECT * FROM pupils";
     $result = mysqli_query($connection, $sql);
     echo
@@ -76,3 +83,5 @@ include 'header.php';
    
     </table>
 </div>
+
+
