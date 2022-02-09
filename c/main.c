@@ -57,6 +57,8 @@ int main(void)
     int doneAssignmentId;
     float averageScore;
     int averageTime;
+    ////
+    
 
     //fetch and compare all the stored usercodes
     do
@@ -127,8 +129,8 @@ int main(void)
                     {
                         ///start the timer for the whole assignment
                         start_secondsM = time(NULL);
-                        printf("\n.1:View all");
-                        printf("\n.2:View Report");
+                        printf("\n.1:Attempt Assignment And View Details");
+                        printf("\n.2:Check status");
                         printf("\n.0:Exit\n");
 
                         scanf("%d", &ch);
@@ -153,7 +155,7 @@ int main(void)
 
                             fuse = fopen(assignmentUrl, "r");
                             temp = fopen(".\\../textfiles/assignments/temp.txt", "w");
-                            printf("choose the assignment to attempt by id\n");
+                            printf("Choose the assignment to attempt by id \t Details will be displayed respectively\n");
                             scanf("%d", &attempt);
                             int counter; //tracking the line to delete
                             while (fscanf(fuse, "%s %s %s %s %s %s %s %s %s %s %s %s %s", id, startDate, startTime, endDate, endTime, a, b, c, d, e, f, g, h) > 0)
@@ -163,7 +165,7 @@ int main(void)
                                 {
                                     printf("\nyou chose\n");
 
-                                    printf("id:%s startDate: %s  startTime: %s endtDate: %s  endTime: %s ch1:%s ch2:%s ch3:%s ch4:%s ch5:%s ch6:%s ch7:%s ch8:%s\n", id, startDate, startTime, endDate, endTime, a, b, c, d, e, f, g, h);
+                                    printf(" id:%s\n  startDate:%s\n  startTime:%s\n  endtDate:%s\n  endTime:%s\n  ch1:%s\n  ch2:%s\n  ch3:%s\n  ch4:%s\n  ch5:%s\n  ch6:%s\n  ch7:%s\n  ch8:%s\n", id, startDate, startTime, endDate, endTime, a, b, c, d, e, f, g, h);
 
                                     doneAssignmentId = atoi(id);
                                     for (int i = 97; i < 105; i++)
@@ -189,16 +191,17 @@ int main(void)
                                                 start_seconds1 = time(NULL);
                                                 //Find the number of correct positions depending on the stored positions in the text file
 
-                                                printf("Instructions:Enter either 0 or 1 \n1.For correct postion \n0.For Invalid postion");
+                                                printf("Attempt starting within a second... .....Incase of too much delay start the application again");
+                                                printf("\n\n\nInstructions:Enter either 0 or 1 \n  1.For correct postion \n  0For Invalid postion");
                                                 strncat(filename1, a, 2);
                                                 strncat(filename1, ".txt", 5);
-                                                printf("\nAttempting %s\n", a);
+                                                printf("\n  Attempting %s\n", a);
                                                 fp1Lines = fopen(filename1, "r");
                                                 while (fscanf(fp1Lines, "%s\n", position1) > 0)
                                                 {
                                                     correctPosition1s++;
                                                 }
-                                                printf("total number is %d", correctPosition1s);
+                                                //printf("total number is %d", correctPosition1s);
                                                 fclose(fp1Lines);
                                                 //attempting the character assignment
                                                 for (int col = 0; col < 5; col++)
@@ -206,11 +209,11 @@ int main(void)
                                                     for (int row = 0; row < 5; row++)
                                                     {
                                                         fp1 = fopen(filename1, "r"); //open the text file containing the right answers
-                                                        printf("\n%s[%d][%d]:\n", a, col, row);
+                                                        printf("\n  %s[%d][%d]:\n", a, col, row);
                                                         ///enter the input and compare
                                                         //open and close the file for each comparison
                                                         //only open the file after the user has entered 1 and 0 to ignore openning the file
-                                                        scanf("%d\n", &input1);
+                                                        scanf("  %d\n", &input1);
                                                         //printf("%d",input1);
                                                         //store the user input for later display
                                                         enteredMatrix1[col][row] = input1;
@@ -974,7 +977,7 @@ int main(void)
                                 return 1;
                             }
 
-                            sprintf(assignmentLine, "%d %d %.2f %ld %s %s", doneAssignmentId, doneDate, averageScore, averageTime, "-", ",");
+                            sprintf(assignmentLine, "%d %d %.2f %ld %s %s", doneAssignmentId, doneDate, averageScore, averageTime, "-");
                             fwrite(assignmentLine, sizeof(char), strlen(assignmentLine), fResults);
                             fclose(fResults);
                             cont = 1;
@@ -986,6 +989,27 @@ int main(void)
                             remove(assignmentUrl);
                             rename(".\\../textfiles/assignments/temp.txt", finalName);
                             return 1;
+                            break;
+                        case 2:
+                            fa = fopen(attemptsUrl,"r");
+
+                            char a_id[10];
+                            char a_date[30];
+                            char a_score[10];
+                            char a_time[10];
+                            char a_comment[100];
+                            int date_seconds;
+                            time_t date;
+
+                            printf("========================================================================================================\n");
+                            while (fscanf(fa, "%s %s %s %s %[^\n]*", a_id, a_date, a_score, a_time, a_comment) > 0)
+                            {
+                                date_seconds = atoi(a_date);
+                                date = date_seconds;
+                                printf(" id: %s\n Average score: %s\n Time took: %s(s)\n Teacher's comment: %s\n Done on: %s\n", a_id, a_score, a_time, a_comment, asctime(gmtime(&date)));
+                                printf("========================================================================================================\n");
+                            }
+                            fclose(fa);
                             break;
                         default:
                             ch = 0;
