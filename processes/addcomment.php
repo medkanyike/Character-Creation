@@ -21,8 +21,8 @@ if(isset($_POST['add_comment'])&& !empty($_POST['comment'])){
         ///add the comment to the pupils file and later to the databsse
         $ext = '.txt';
         $contents = file_get_contents(".\../textfiles/attempts/$usercode$ext");
-        $line = "$a_id $date $formated_score $time - ,";
-        $contents = str_replace($line, "$a_id $date $formated_score $time $comment ,", $contents);
+        $line = "$a_id $date $formated_score $time - ";
+        $contents = str_replace($line, "$a_id $date $formated_score $time $comment ", $contents);
         file_put_contents(".\../textfiles/attempts/$usercode$ext", $contents);
         
         ///update the database as well

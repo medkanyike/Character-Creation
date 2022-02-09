@@ -19,8 +19,8 @@ if(isset($_POST['Deactivate'])){
     //change the user status in the file to deactivated as well as in the database 
     //update the files
     $contents0 = file_get_contents(".\../textfiles/pupils.txt");
-    $line0 = "$usercode deactivated .\../textfiles/assignments/$usercode.txt .\../textfiles/assignments/$usercode.txt";
-    $contents0 = str_replace($line0, "$usercode activated .\../textfiles/assignments/$usercode.txt .\../textfiles/assignments/$usercode.txt", $contents0);
+    $line0 = "$usercode deactivated .\../textfiles/assignments/$usercode.txt .\../textfiles/attempts/$usercode.txt";
+    $contents0 = str_replace($line0, "$usercode activated .\../textfiles/assignments/$usercode.txt .\../textfiles/attempts/$usercode.txt", $contents0);
     file_put_contents(".\../textfiles/pupils.txt", $contents0);
     //also remove the usercode from the request list
     $contents1 = file_get_contents(".\../c/activation/requests.txt");
@@ -33,18 +33,6 @@ if(isset($_POST['Deactivate'])){
     mysqli_query($connection, $sql);
     header("Location:.\../ViewPupils.php");
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
