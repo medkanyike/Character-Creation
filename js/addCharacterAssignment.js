@@ -48,9 +48,15 @@ uploadbttn.addEventListener('click',(e)=>{
       error.innerHTML = 
       `
       <h5>Some fields where submitted while empty</h5>
-      `
+      `;
+      
     }else{
       //now submit the form //create a form and add data to it 
+      // console.log(actualendDateTime);
+      // console.log(actualstartDateTime); 
+      // var unix_seconds = ((new Date(actualendDateTime)).getTime()) /1000;
+
+      // console.log(unix_seconds);
     var aform = new FormData();
     aform.append("startdateTime",actualstartDateTime);
     aform.append("enddateTime",actualendDateTime)

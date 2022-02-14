@@ -1,9 +1,10 @@
 body{
     margin-left: 400px;
-    background-color: lightskyblue;
+    background-color: #fa7a49;
     margin-top: 50px;
     background-image: url("R.jpg");
     background-repeat: no-repeat;
+    text-decoration: none;
 }
 h1{
     color: whitesmoke;

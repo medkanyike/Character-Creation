@@ -3,24 +3,28 @@ include 'header.php';
 ?>
 
 <body>
-    <div id="middle_section">
+    <div id="main_container">
         <?php
-        if (isset($_SESSION['username'])) {
-            echo
-            '
+        include 'sideBar.php';
+        ?>
+        <div id="middle_section">
+            <?php
+            if (isset($_SESSION['username'])) {
+                echo
+                '
             <label>Register teacher </label>
-                <form action="./processes/registerTeacher.php" method="post">
+                <form action="./processes/registerTeacher.php" method="post"id="AddPupilForm">
                 <input type="text" name="firstname" id="" placeholder="teacher firstname"><br>
                 <input type="text" name="lastname" id="" placeholder=" teacher lastname"><br>
                 <input type="email" name="email" id="" placeholder="teacher email"><br>
                 <input type="submit" value="Register Teacher">
                 </form>
             ';
-        } else {
-            header("Location:./index.php");
-        }
+            } else {
+                header("Location:./index.php");
+            }
 
-        ?>
-    </div>
+            ?>
+        </div>
 
 </body>

@@ -1,29 +1,20 @@
-@import url('https://fonts.googleapis.com/css?family=Tangerine');
 
 *{
- margin: 0;
- padding: 0;
  list-style: none;
  text-decoration: none;
+
 }
 body{
     font-family: 'Roboto', sans-serif;
-    background-color: #063146c7;
+    background-color: #f7ab0a;
 }
-.sideBar{
-    position: absolute;
-    width: 250px;
-    height: 100vh;
-    background-color: #042331;
-    transition: all .5s ease;
-    
-}
+
 .sideBar header{
     font-size: 22px;
     color: white;
     text-align: center;
     line-height: 70px;
-    background-color: #063146;
+    background-color: #fa7a49;
     user-select: none;
 }
 .sideBar ul li{
@@ -66,33 +57,54 @@ label #btn{
     padding: 6px 12px;
     transition: all .5s;
 }
-label #cancel{
-    z-index: 1111;
-    left: -195px;
-    top: 80px;
-    font-size: 30px;
-    color: #042331de;
-    padding: 4px 9px;
-    transition: all .5s;
-    background: #063146c7;
+
+#myChart {
+    margin-left: 200px;
+    width: 50%;
+    max-height: 350px;
+    border-radius: 20px
 }
-#check:checked ~ .sideBar{
-    left: 0;
-}
-#check:checked ~ label #btn{
-    left: 250px;
-    opacity: 0;
-    pointer-events: none;
-}
-#check:checked ~ label #cancel{
-    left: 195px;
+#myChart1 {
+    margin-left: 10px;
+  
+    border-radius: 20px
 }
 
 #middle_section{
-    position: absolute;
-    background-color:white;
-    margin-left:250px;
-    width:70%;
-    align-items: center;
+    background-color: white;
+    width: 70%;
+    margin-top:20px;
+    border-radius: 20px;
+    
+}
+#middle_section1 {
+    background-color: white;
+    width: 70%;
+    margin-top: 20px;
+    border-radius: 20px;
 
+}
+#error_assignment{
+    font-size: 20px;
+    border-radius: 5px;
+    padding:5px;
+   
+    
+}
+
+#AddPupilForm {
+    margin-top:100px;
+    text-align: center;
+    width: 100%;
+    margin-left:30px;
+    font-size: 30px;
+}
+#AddPupilForm  input[type = "text"]{
+   width: 90%;
+   height:30px;
+   text-align: center;
+   margin-right: 5%;
+}
+.pupil_tables{
+    width:90%;
 }
