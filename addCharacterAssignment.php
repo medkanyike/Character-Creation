@@ -48,43 +48,88 @@ include 'header.php';
                 ?>
             </div>
             <div id="added_assignments">
+                <form action="" method="post">
+                    <input type="text" name="search_assignment_id" id="" placeholder="search by id">
+                    <input type="submit" name="search_bbtn" value="Search">
+                </form>
                 <?php
                 ///already added assignments
-                $sql01 = "SELECT * FROM assignments ORDER BY assignment_id DESC";
-                $result01 = mysqli_query($connection, $sql01);
+                if(isset($_POST['search_bbtn']) && !empty($_POST['search_bbtn'])){
+                    ///search for the specific assignment
+                    $search_assignment_id = $_POST['search_assignment_id'];
+                    $sql01 = "SELECT * FROM assignments  WHERE assignment_id = '$search_assignment_id';";
+                    $result01 = mysqli_query($connection, $sql01);
 
-                if (mysqli_num_rows($result01) > 0) {
-                    while ($row01 = mysqli_fetch_assoc($result01)) {
-                        $assignment_id = $row01['assignment_id'];
-                        $assignment_name = $row01['assignment_name'];
+                    if (mysqli_num_rows($result01) > 0) {
+                        while ($row01 = mysqli_fetch_assoc($result01)) {
+                            $assignment_id = $row01['assignment_id'];
+                            $assignment_name = $row01['assignment_name'];
 
-                        echo
-                        
-                        '
-                        <div class="assignment">
-                        <p>
-                    ' . $assignment_id . ':
-                    ' . $assignment_name . '
-                    </p>';
-                        //fetch the characters for each assignment
-                        $sql02 = "SELECT character_name FROM character_assignment WHERE assignment_id = '$assignment_id';";
-                        $result02 = mysqli_query($connection, $sql02);
-                        //echo mysqli_num_rows($result02);
-                        while ($row02 = mysqli_fetch_assoc($result02)) {
-                            echo $row02['character_name'];
-                            echo ',';
+                            echo
+
+                            '
+                            <div class="assignment">
+                            <p>
+                        ' . $assignment_id . ':
+                        ' . $assignment_name . '
+                        </p>';
+                            //fetch the characters for each assignment
+                            $sql02 = "SELECT character_name FROM character_assignment WHERE assignment_id = '$assignment_id';";
+                            $result02 = mysqli_query($connection, $sql02);
+                            //echo mysqli_num_rows($result02);
+                            while ($row02 = mysqli_fetch_assoc($result02)) {
+                                echo $row02['character_name'];
+                                echo ',';
+                            }
+                            echo '<br>';
+                            //count pupils that have so far attempted the assignment
+                            $sql03 = "SELECT * FROM attempts WHERE assignment_id = '$assignment_id';";
+                            $result03 = mysqli_query($connection, $sql03);
+                            echo 'Attempted by:';
+                            echo mysqli_num_rows($result03);
+                            echo '</br>';
+                            echo '</div>';
                         }
-                        echo '<br>';
-                        //count pupils that have so far attempted the assignment
-                        $sql03 = "SELECT * FROM attempts WHERE assignment_id = '$assignment_id';";
-                        $result03 = mysqli_query($connection, $sql03);
-                        echo 'Attempted by:';
-                        echo mysqli_num_rows($result03);
-                        echo'</br>';
-                        echo '</div>';
+                    }
+
+                }else{
+                    $sql01 = "SELECT * FROM assignments ORDER BY assignment_id DESC";
+                    $result01 = mysqli_query($connection, $sql01);
+
+                    if (mysqli_num_rows($result01) > 0) {
+                        while ($row01 = mysqli_fetch_assoc($result01)) {
+                            $assignment_id = $row01['assignment_id'];
+                            $assignment_name = $row01['assignment_name'];
+
+                            echo
+                            
+                            '
+                            <div class="assignment">
+                            <p>
+                        ' . $assignment_id . ':
+                        ' . $assignment_name . '
+                        </p>';
+                            //fetch the characters for each assignment
+                            $sql02 = "SELECT character_name FROM character_assignment WHERE assignment_id = '$assignment_id';";
+                            $result02 = mysqli_query($connection, $sql02);
+                            //echo mysqli_num_rows($result02);
+                            while ($row02 = mysqli_fetch_assoc($result02)) {
+                                echo $row02['character_name'];
+                                echo ',';
+                            }
+                            echo '<br>';
+                            //count pupils that have so far attempted the assignment
+                            $sql03 = "SELECT * FROM attempts WHERE assignment_id = '$assignment_id';";
+                            $result03 = mysqli_query($connection, $sql03);
+                            echo 'Attempted by:';
+                            echo mysqli_num_rows($result03);
+                            echo'</br>';
+                            echo '</div>';
+                        }
                     }
                 }
                 ?>
+                
             </div>
         </div>
     </div>
