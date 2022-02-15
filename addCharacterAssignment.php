@@ -48,6 +48,7 @@ include 'header.php';
                 ?>
             </div>
             <div id="added_assignments">
+                <h3>already added assignment</h3>
                 <form action="" method="post">
                     <input type="text" name="search_assignment_id" id="" placeholder="search by id">
                     <input type="submit" name="search_bbtn" value="Search">

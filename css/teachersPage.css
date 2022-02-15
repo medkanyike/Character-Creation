@@ -104,3 +104,18 @@ label #btn{
    text-align: center;
    margin-right: 5%;
 }
+#registerTeacher{
+     margin-top:10px;
+     text-align: center;
+     width: 100%;
+     margin-left:30px;
+     font-size: 30px;
+}
+#registerTeacher input[type="text"],
+input[type="email"] {
+    width: 90%;
+    height:30px;
+    text-align: center;
+    font-size:20px;
+    margin-right: 5%;
+}

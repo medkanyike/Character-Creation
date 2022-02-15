@@ -10,7 +10,7 @@ if(isset($_POST['login_bttn'])){
     }else{
         $sql = "SELECT * FROM users WHERE username = '$username' AND passwrd= '$password';";
         $result = mysqli_query($connection,$sql);
-        if(mysqli_fetch_array($result)>0){
+        if(mysqli_num_rows($result)>0){
             if($username == 'admin'){ 
                 session_start();
                 $_SESSION['username'] = $username;

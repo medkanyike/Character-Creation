@@ -18,12 +18,12 @@ include './processes/connection.php';
             <table id="assignmentTable" class="display">
                 <thead>
                     <tr>
-                        <th>id</th>
+                        <th>assignment id</th>
                         <th>Characters</th>
                         <th>Usercode</th>
                         <th>Done On</th>
                         <th>Score</th>
-                        <th>TimeTaken</th>
+                        <th>TimeTaken(s)</th>
                         <th>Comments</th>
                         <th>Actions</th>
                         <th>Charts</th>

@@ -86,7 +86,7 @@ int main(void)
             {
 
                 int alreadyRequested = 0;
-                //check if the user had already submitted their request
+                //check if the user is activated
                 if (strcmp(status, "activated") == 1)
                 {
                     ///Reqesut for activatation
@@ -1016,13 +1016,13 @@ int main(void)
 
                             if (!fa)
                             {
-                                printf("\nYou have not yet attempted any assignments");
+                                printf("\nYou have not yet attempted any assignments\n");
             
-                            }
+                            }else{
 
                             
                             printf("=======================================Attempted assignments=================================================================\n");
-                            
+                            }
                             while (fscanf(fa, "%s %s %s %s %[^\n]*", a_id, a_date, a_score, a_time, a_comment) > 0)
                             {
                                 date_seconds = atoi(a_date);
