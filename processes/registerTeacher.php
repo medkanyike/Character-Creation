@@ -1,6 +1,7 @@
 <?php
 include 'connection.php';
 
+if(isset($_POST['register'])){
 $firstname = chop($_POST['firstname']);
 $lastname = chop($_POST['lastname']);
 $email = chop($_POST['email']);
@@ -32,7 +33,7 @@ if(empty($firstname)||empty($email)||empty($lastname))
             //the usercode to the teacher via email
             $to      = $email;
             $subject = 'Teacher Character creation usercode';
-            $message = 'Use this usercoder'.$usercode. ' for logining in';
+            $message = 'Use this usercode'.$usercode. ' for logining in';
             $headers = 'From: kinderCharacter@gmail.com' . "\n" ;
 
             mail($to, $subject, $message, $headers);
@@ -44,5 +45,6 @@ if(empty($firstname)||empty($email)||empty($lastname))
 
     }
     insertIntoTable();
+}
 }
 ?>

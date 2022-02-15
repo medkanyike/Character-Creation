@@ -53,7 +53,7 @@ if($connection == TRUE){
                 for ($i=0; $i < 8 - count($character_names); $i++) {
                     $current1 .= '-' . "\t";
                 }
-                //$current1 .= ",\n";
+                $current1 .= "\n";
                 file_put_contents($file1, $current1);
                 fclose($file1);
         }

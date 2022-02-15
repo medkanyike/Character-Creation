@@ -2,3 +2,62 @@
     display:none;
     position:absolute;
 }
+
+#main_container{
+    display: flex;
+    justify-content:space-around;
+}
+
+#add__assignment{
+    text-align:center;
+    width: 100%;
+    margin-left:100px;
+    font-size: 30px;
+}
+#instructions{
+    text-align:center;
+    width: 100%;
+    margin-left:100px;
+    font-size: 20px;
+}
+#alreadyAdded{
+     text-align: center;
+     width: 100%;
+     margin-left: 100px;
+     font-size: 20px;
+}
+
+#assignment_toAdd{
+    margin-left: 100px;
+    font-size: 15px;
+}
+#upload_bttn_section{
+    margin-left: 100px;
+    font-size: 20px;
+}
+#notSelected{
+    margin-left: 100px;
+    font-size: 20px;
+}
+#notSelected button {
+    font-size: 15px;
+    margin: 5px;
+    padding: 5px;
+}
+#notSelected button:hover {
+    font-size: 15px;
+    margin: 5px;
+    padding: 5px;
+    background-color:green;
+    border-width: 0px;
+}
+#added_assignments{
+     margin-left: 100px;
+     font-size: 18px;
+}
+#added_assignments .assignment{
+    background-color:rgb(214, 214, 224);
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 20px;
+}

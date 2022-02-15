@@ -6,7 +6,7 @@ $contact = chop($_POST['contact']);
 
 if(isset($_POST['register_bttn'])){
     if(empty($firstname)||empty($lastname)||empty($contact)){
-        header("Location:.\../teacherPage.php?error='emptyFields'");
+        header("Location:.\../registerPupil.php?error='emptyFields'");
     }else{
         //generate a unique usercode for each student
         $firstname_first_character = substr($firstname, 0, 1);
@@ -23,7 +23,7 @@ if(isset($_POST['register_bttn'])){
             $result = mysqli_query($connection, $sql);
             if (mysqli_num_rows($result) > 0) {
                 //call the same function to generate a different value
-                insertIntoTable();
+                addPupil();
             } else {
                 $sql = "INSERT INTO pupils(firstname, lastname, contact ,usercode) 
                 VALUES ('$firstname','$lastname','$contact','$usercode');";
@@ -34,8 +34,8 @@ if(isset($_POST['register_bttn'])){
                 // Open the file to get existing content
                 $current = file_get_contents($file);
                 // Append a new person to the file
-                $current .= $usercode . "\n";
-                $current.= ".\../textfiles/assignments/.$usercode$ext";
+                $current .= "$usercode activated .\../textfiles/assignments/$usercode.txt .\../textfiles/attempts/$usercode.txt \n";
+               
                 file_put_contents($file, $current);
                 fclose($file);
                 // Write the contents back to the file

@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <string.h>
 #include <time.h>
-#include <math.h>
+
 
 int main(void)
 {
-    void viewAll(char);
     FILE *fp;
     FILE *fResults;
     FILE *fp1Lines, *fp2Lines, *fp3Lines, *fp4Lines, *fp5Lines, *fp6Lines, *fp7Lines, *fp8Lines;
@@ -58,8 +58,19 @@ int main(void)
     int doneAssignmentId;
     float averageScore;
     int averageTime;
+    ////
+    ///check dates
+    struct tm tmVar1;
+    time_t timeVar1;
 
-    //fetch and compare all the stored usercodes
+    struct tm tmVar2;
+    time_t timeVar2;
+    struct tm tmVar3;
+    time_t timeVar3;
+    int check;
+    time_t expire_line = time(NULL);
+
+    // fetch and compare all the stored usercodes
     do
     {
 
@@ -75,7 +86,7 @@ int main(void)
             {
 
                 int alreadyRequested = 0;
-                //check if the user had already submitted their request
+                //check if the user is activated
                 if (strcmp(status, "activated") == 1)
                 {
                     ///Reqesut for activatation
@@ -128,8 +139,9 @@ int main(void)
                     {
                         ///start the timer for the whole assignment
                         start_secondsM = time(NULL);
-                        printf("\n.1:View all");
-                        printf("\n.2:View Report");
+                        printf("\n.1:Attempt Assignment And View Details");
+                        printf("\n.2:Check status");
+                        printf("\n.3:Check assignments between dates");
                         printf("\n.0:Exit\n");
 
                         scanf("%d", &ch);
@@ -154,7 +166,7 @@ int main(void)
 
                             fuse = fopen(assignmentUrl, "r");
                             temp = fopen(".\\../textfiles/assignments/temp.txt", "w");
-                            printf("choose the assignment to attempt by id\n");
+                            printf("Choose the assignment to attempt by id \t Details will be displayed respectively\n");
                             scanf("%d", &attempt);
                             int counter; //tracking the line to delete
                             while (fscanf(fuse, "%s %s %s %s %s %s %s %s %s %s %s %s %s", id, startDate, startTime, endDate, endTime, a, b, c, d, e, f, g, h) > 0)
@@ -164,7 +176,7 @@ int main(void)
                                 {
                                     printf("\nyou chose\n");
 
-                                    printf("id:%s startDate: %s  startTime: %s endtDate: %s  endTime: %s ch1:%s ch2:%s ch3:%s ch4:%s ch5:%s ch6:%s ch7:%s ch8:%s\n", id, startDate, startTime, endDate, endTime, a, b, c, d, e, f, g, h);
+                                    printf(" id:%s\n  startDate:%s\n  startTime:%s\n  endtDate:%s\n  endTime:%s\n  ch1:%s\n  ch2:%s\n  ch3:%s\n  ch4:%s\n  ch5:%s\n  ch6:%s\n  ch7:%s\n  ch8:%s\n", id, startDate, startTime, endDate, endTime, a, b, c, d, e, f, g, h);
 
                                     doneAssignmentId = atoi(id);
                                     for (int i = 97; i < 105; i++)
@@ -190,16 +202,17 @@ int main(void)
                                                 start_seconds1 = time(NULL);
                                                 //Find the number of correct positions depending on the stored positions in the text file
 
-                                                printf("Instructions:Enter either 0 or 1 \n1.For correct postion \n0.For Invalid postion");
+                                                printf("Attempt starting within a second... .....Incase of too much delay start the application again");
+                                                printf("\n\n\nInstructions:Enter either 0 or 1 \n  1.For correct postion \n  0For Invalid postion");
                                                 strncat(filename1, a, 2);
                                                 strncat(filename1, ".txt", 5);
-                                                printf("\nAttempting %s\n", a);
+                                                printf("\n  Attempting %s\n", a);
                                                 fp1Lines = fopen(filename1, "r");
                                                 while (fscanf(fp1Lines, "%s\n", position1) > 0)
                                                 {
                                                     correctPosition1s++;
                                                 }
-                                                printf("total number is %d", correctPosition1s);
+                                                //printf("total number is %d", correctPosition1s);
                                                 fclose(fp1Lines);
                                                 //attempting the character assignment
                                                 for (int col = 0; col < 5; col++)
@@ -207,11 +220,11 @@ int main(void)
                                                     for (int row = 0; row < 5; row++)
                                                     {
                                                         fp1 = fopen(filename1, "r"); //open the text file containing the right answers
-                                                        printf("\n%s[%d][%d]:\n", a, col, row);
+                                                        printf("\n  %s[%d][%d]:\n", a, col, row);
                                                         ///enter the input and compare
                                                         //open and close the file for each comparison
                                                         //only open the file after the user has entered 1 and 0 to ignore openning the file
-                                                        scanf("%d\n", &input1);
+                                                        scanf("  %d\n", &input1);
                                                         //printf("%d",input1);
                                                         //store the user input for later display
                                                         enteredMatrix1[col][row] = input1;
@@ -975,7 +988,7 @@ int main(void)
                                 return 1;
                             }
 
-                            sprintf(assignmentLine, "%d %d %.2f %ld %s %s", doneAssignmentId, doneDate, averageScore, averageTime, "-", ",");
+                            sprintf(assignmentLine, "%d %d %.2f %ld %s %s", doneAssignmentId, doneDate, averageScore, averageTime, "-");
                             fwrite(assignmentLine, sizeof(char), strlen(assignmentLine), fResults);
                             fclose(fResults);
                             cont = 1;
@@ -988,6 +1001,224 @@ int main(void)
                             rename(".\\../textfiles/assignments/temp.txt", finalName);
                             return 1;
                             break;
+                        case 2:
+                            fa = fopen(attemptsUrl,"r");
+
+                            char a_id[10];
+                            char a_date[30];
+                            char a_score[10];
+                            char a_time[10];
+                            char a_comment[100];
+                            int date_seconds;
+                            time_t date;
+                            int a_attempted=0;
+                            int not_attempted=0;
+
+                            if (!fa)
+                            {
+                                printf("\nYou have not yet attempted any assignments\n");
+            
+                            }else{
+
+                            
+                            printf("=======================================Attempted assignments=================================================================\n");
+                            }
+                            while (fscanf(fa, "%s %s %s %s %[^\n]*", a_id, a_date, a_score, a_time, a_comment) > 0)
+                            {
+                                date_seconds = atoi(a_date);
+                                date = date_seconds;
+                                printf(" id: %s\n Average score: %s\n Time took: %s(s)\n Teacher's comment: %s\n Done on: %s\n", a_id, a_score, a_time, a_comment, asctime(gmtime(&date)));
+                                a_attempted = a_attempted + 1;
+                                printf("========================================================================================================\n");
+                            }
+                            fclose(fa);
+                            printf("=======================================Assignments not yet attempted=================================================================\n");
+                            ///attempted assignments
+                            fa = fopen(assignmentUrl, "r");
+                            while (fscanf(fa, "%s %s %s %s %s %s %s %s %s %s %s %s %s", id, startDate, startTime, endDate, endTime, a, b, c, d, e, f, g, h) > 0)
+                            {
+                                not_attempted = not_attempted +1;
+                                printf("id:%s startDate: %s  startTime: %s endtDate: %s  endTime: %s  %s %s %s %s %s %s %s %s\n", &id, startDate, startTime, endDate, endTime, a, b, c, d, e, f, g, h);
+
+                            }
+                            fclose(fa);
+                            printf("You have attempted:%d\n You are left with:%d\n", a_attempted, not_attempted);
+                            break;
+                        case 3:
+                        
+                            /// first ask for the datefrom date two
+                            ///first opne the file and inside it choose what to display depending on the 
+                            //switch statement
+                            do
+                            {
+                                fa = fopen(assignmentUrl, "r");
+                                ///ask the pupil to enter their choice of checking
+                                printf("Enter your prefered choice\n");
+                                printf("\n1.Assignments before\n2.Assignments after\n3.Assignments between\n");
+                                scanf("%d",&check);
+                                switch (check)
+                                {
+                                case 1:
+                                ///request the user to enter one date
+                                printf("Enter year\n");
+                                scanf("%d", &tmVar1.tm_year); /// enter year
+                                printf("Enter month\n");
+                                scanf("%d", &tmVar1.tm_mon);
+                                printf("Enter day\n");
+                                scanf("%d", &tmVar1.tm_mday);
+                                tmVar1.tm_hour = 0;
+                                tmVar1.tm_min = 0;
+                                tmVar1.tm_sec = 0;
+                                tmVar1.tm_isdst = 1;
+                                tmVar1.tm_year -= 1900;
+                                tmVar1.tm_mon--;
+
+                                timeVar1 = mktime(&tmVar1);
+                                //printf("time %d\n", timeVar1);
+                                ///printf("You are yet to find the assignments\n");
+                                ///diplay assignments whose end dates is less than thi some
+                                while (fscanf(fa, "%s %s %s %s %s %s %s %s %s %s %s %s %s", id, startDate, startTime, endDate, endTime, a, b, c, d, e, f, g, h) > 0)
+                                {
+                                    // /convert date time to second in epoch
+                                    //printf("%s\n",endDate);
+                                    sscanf(endDate, "%d-%d-%d", &tmVar2.tm_year, &tmVar2.tm_mon, &tmVar2.tm_mday);
+                                    tmVar2.tm_hour = 0;
+                                    tmVar2.tm_min = 0;
+                                    tmVar2.tm_sec = 0;
+                                    tmVar2.tm_isdst = 1;
+                                    tmVar2.tm_year -= 1900;
+                                    tmVar2.tm_mon--;
+                                    timeVar2 = mktime(&tmVar2);
+                                    //printf("time %d\n", timeVar2);
+                                    //printf("%d\n",expire_line);
+                                    ///the if the end date is less and if its less the todayz date then it has expired
+                                    if ((int)timeVar2 < (int)timeVar1){
+                                      if ((int)timeVar2 < (int)expire_line)
+                                        {
+                                        
+                                            printf("Expired:");
+                                            printf("id:%s startDate: %s  startTime: %s endtDate: %s  endTime: %s  %s %s %s %s %s %s %s %s\n", &id, startDate, startTime, endDate, endTime, a, b, c, d, e, f, g, h);
+                                        }else{
+                                            printf("id:%s startDate: %s  startTime: %s endtDate: %s  endTime: %s  %s %s %s %s %s %s %s %s\n", &id, startDate, startTime, endDate, endTime, a, b, c, d, e, f, g, h);
+                                        }
+
+                                    }
+                                }
+
+                                break;
+                                case 2:
+                                    /// request the user to enter one date
+                                    printf("Enter year\n");
+                                    scanf("%d", &tmVar1.tm_year); /// enter year
+                                    printf("Enter month\n");
+                                    scanf("%d", &tmVar1.tm_mon);
+                                    printf("Enter day\n");
+                                    scanf("%d", &tmVar1.tm_mday);
+                                    tmVar1.tm_hour = 0;
+                                    tmVar1.tm_min = 0;
+                                    tmVar1.tm_sec = 0;
+                                    tmVar1.tm_isdst = 1;
+                                    tmVar1.tm_year -= 1900;
+                                    tmVar1.tm_mon--;
+
+                                    timeVar1 = mktime(&tmVar1);
+                                    while (fscanf(fa, "%s %s %s %s %s %s %s %s %s %s %s %s %s", id, startDate, startTime, endDate, endTime, a, b, c, d, e, f, g, h) > 0)
+                                    {
+                                        // /convert date time to second in epoch
+                                        // printf("%s\n",endDate);
+                                        sscanf(endDate, "%d-%d-%d", &tmVar2.tm_year, &tmVar2.tm_mon, &tmVar2.tm_mday);
+                                        tmVar2.tm_hour = 0;
+                                        tmVar2.tm_min = 0;
+                                        tmVar2.tm_sec = 0;
+                                        tmVar2.tm_isdst = 1;
+                                        tmVar2.tm_year -= 1900;
+                                        tmVar2.tm_mon--;
+                                        timeVar2 = mktime(&tmVar2);
+                                        // printf("time %d\n", timeVar2);
+                                        // printf("%d\n",expire_line);
+                                        /// the if the end date is less and if its less the todayz date then it has expired
+                                        if ((int)timeVar2 > (int)timeVar1)
+                                        {
+                                            if ((int)timeVar2 < (int)expire_line)
+                                            {
+
+                                                printf("Expired:");
+                                                printf("id:%s startDate: %s  startTime: %s endtDate: %s  endTime: %s  %s %s %s %s %s %s %s %s\n", &id, startDate, startTime, endDate, endTime, a, b, c, d, e, f, g, h);
+                                            }
+                                            else
+                                            {
+                                                printf("id:%s startDate: %s  startTime: %s endtDate: %s  endTime: %s  %s %s %s %s %s %s %s %s\n", &id, startDate, startTime, endDate, endTime, a, b, c, d, e, f, g, h);
+                                            }
+                                        }
+                                    }
+                                    case 3:
+                                    printf("Enter the minimum date\n");
+                                    printf("Enter year\n");
+                                    scanf("%d", &tmVar1.tm_year); /// enter year
+                                    printf("Enter month\n");
+                                    scanf("%d", &tmVar1.tm_mon);
+                                    printf("Enter day\n");
+                                    scanf("%d", &tmVar1.tm_mday);
+                                    tmVar1.tm_hour = 0;
+                                    tmVar1.tm_min = 0;
+                                    tmVar1.tm_sec = 0;
+                                    tmVar1.tm_isdst = 1;
+                                    tmVar1.tm_year -= 1900;
+                                    tmVar1.tm_mon--;
+                                    timeVar1 = mktime(&tmVar1);
+
+                                    printf("Enter the maximum date\n");
+                                    printf("Enter year\n");
+                                    scanf("%d", &tmVar3.tm_year); /// enter year
+                                    printf("Enter month\n");
+                                    scanf("%d", &tmVar3.tm_mon);
+                                    printf("Enter day\n");
+                                    scanf("%d", &tmVar3.tm_mday);
+                                    tmVar3.tm_hour = 0;
+                                    tmVar3.tm_min = 0;
+                                    tmVar3.tm_sec = 0;
+                                    tmVar3.tm_isdst = 1;
+                                    tmVar3.tm_year -= 1900;
+                                    tmVar3.tm_mon--;
+                                    timeVar3 = mktime(&tmVar3);
+                                    while (fscanf(fa, "%s %s %s %s %s %s %s %s %s %s %s %s %s", id, startDate, startTime, endDate, endTime, a, b, c, d, e, f, g, h) > 0)
+                                    {
+                                        // /convert date time to second in epoch
+                                        // printf("%s\n",endDate);
+                                        sscanf(endDate, "%d-%d-%d", &tmVar2.tm_year, &tmVar2.tm_mon, &tmVar2.tm_mday);
+                                        tmVar2.tm_hour = 0;
+                                        tmVar2.tm_min = 0;
+                                        tmVar2.tm_sec = 0;
+                                        tmVar2.tm_isdst = 1;
+                                        tmVar2.tm_year -= 1900;
+                                        tmVar2.tm_mon--;
+                                        timeVar2 = mktime(&tmVar2);
+                                        // printf("time %d\n", timeVar2);
+                                        // printf("%d\n",expire_line);
+                                        /// the if the end date is less and if its less the todayz date then it has expired
+                                        if ((int)timeVar1 <= (int)timeVar2 <= (int)timeVar3)
+                                        {
+                                            if ((int)timeVar2 < (int)expire_line)
+                                            {
+
+                                                printf("Expired:");
+                                                printf("id:%s startDate: %s  startTime: %s endtDate: %s  endTime: %s  %s %s %s %s %s %s %s %s\n", &id, startDate, startTime, endDate, endTime, a, b, c, d, e, f, g, h);
+                                            }
+                                            else
+                                            {
+                                                printf("id:%s startDate: %s  startTime: %s endtDate: %s  endTime: %s  %s %s %s %s %s %s %s %s\n", &id, startDate, startTime, endDate, endTime, a, b, c, d, e, f, g, h);
+                                            }
+                                        }
+                                    }
+
+                                default:
+                                    break;
+                                }
+                                
+                            } while (check!=0);
+                            fclose(fa);
+                        case 0:
+                           return 1;
                         default:
                             ch = 0;
                             break;

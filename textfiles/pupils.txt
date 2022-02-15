@@ -1,4 +1,7 @@
-mM1966u activated .\../textfiles/assignments/mM1966u.txt
-kM1624u activated .\../textfiles/assignments/kM1624u.txt
-mS1675h deactivated .\../textfiles/assignments/mS1675h.txt
-mC1105h activated .\../textfiles/assignments/mC1105h.txt
+mM1966u activated .\../textfiles/assignments/mM1966u.txt .\../textfiles/attempts/mM1966u.txt
+kM1624u deactivated .\../textfiles/assignments/kM1624u.txt .\../textfiles/attempts/kM1624u.txt
+mS1675h activated .\../textfiles/assignments/mS1675h.txt .\../textfiles/attempts/mS1675h.txt
+mC1105h deactivated .\../textfiles/assignments/mC1105h.txt .\../textfiles/attempts/mC1105h.txt
+KJ1113o activated .\../textfiles/assignments/KJ1113o.txt .\../textfiles/attempts/KJ1113o.txt 
+MM1443u activated .\../textfiles/assignments/MM1443u.txt .\../textfiles/attempts/MM1443u.txt 
+kS847i activated .\../textfiles/assignments/kS847i.txt .\../textfiles/attempts/kS847i.txt 
